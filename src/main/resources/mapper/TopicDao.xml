@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.hdu.brainstorm.dao.TopicDao">
+
+    <resultMap type="edu.hdu.brainstorm.entity.Topic" id="TopicMap">
+        <result property="topicid" column="topicid" jdbcType="VARCHAR"/>
+        <result property="userid" column="userid" jdbcType="VARCHAR"/>
+        <result property="context" column="context" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="tag" column="tag" jdbcType="VARCHAR"/>
+        <result property="date" column="date" jdbcType="TIMESTAMP"/>
+        <result property="isdeleted" column="isdeleted" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TopicMap">
+        select
+          topicid, userid, context, description, tag, date, isdeleted
+        from brainstorm.topic
+        where topicid = #{topicid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TopicMap">
+        select
+          topicid, userid, context, description, tag, date, isdeleted
+        from brainstorm.topic
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TopicMap">
+        select
+          topicid, userid, context, description, tag, date, isdeleted
+        from brainstorm.topic
+        <where>
+            <if test="topicid != null and topicid != ''">
+                and topicid = #{topicid}
+            </if>
+            <if test="userid != null and userid != ''">
+                and userid = #{userid}
+            </if>
+            <if test="context != null and context != ''">
+                and context = #{context}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="tag != null and tag != ''">
+                and tag = #{tag}
+            </if>
+            <if test="date != null">
+                and date = #{date}
+            </if>
+            <if test="isdeleted != null and isdeleted != ''">
+                and isdeleted = #{isdeleted}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="topicid" useGeneratedKeys="true">
+        insert into brainstorm.topic(userid, context, description, tag, date, isdeleted)
+        values (#{userid}, #{context}, #{description}, #{tag}, #{date}, #{isdeleted})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update brainstorm.topic
+        <set>
+            <if test="userid != null and userid != ''">
+                userid = #{userid},
+            </if>
+            <if test="context != null and context != ''">
+                context = #{context},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="tag != null and tag != ''">
+                tag = #{tag},
+            </if>
+            <if test="date != null">
+                date = #{date},
+            </if>
+            <if test="isdeleted != null and isdeleted != ''">
+                isdeleted = #{isdeleted},
+            </if>
+        </set>
+        where topicid = #{topicid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from brainstorm.topic where topicid = #{topicid}
+    </delete>
+
+</mapper>
