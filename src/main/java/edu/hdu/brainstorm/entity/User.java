@@ -20,6 +20,43 @@ public class User implements Serializable {
     private Date date;
     private Object pic;
 
+    public String getUserid() {
+        return userid;
+    }
 
+    public String getUsername() {
+        return username;
+    }
 
+    public String getUserpassword() {
+        return userpassword;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public Object getPic() {
+        return pic;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setUserpassword(String userpassword) {
+        this.userpassword = userpassword;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setPic(Object pic) {
+        this.pic = pic;
+    }
 }
