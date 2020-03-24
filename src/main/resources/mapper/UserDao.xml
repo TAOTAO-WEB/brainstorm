@@ -11,6 +11,14 @@
     </resultMap>
 
     <!--查询单个-->
+    <select id="queryByUsername" resultMap="UserMap">
+        select
+          userid, username, userpassword, date, pic
+        from brainstorm.user
+        where username = #{username}
+    </select>
+
+    <!--查询单个-->
     <select id="queryById" resultMap="UserMap">
         select
           userid, username, userpassword, date, pic
@@ -52,8 +60,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="userid" useGeneratedKeys="true">
-        insert into brainstorm.user(username, userpassword, date, pic)
-        values (#{username}, #{userpassword}, #{date}, #{pic})
+        insert into brainstorm.user(username, userpassword, date, pic,userid)
+        values (#{username}, #{userpassword}, #{date}, #{pic},#{userid})
     </insert>
 
     <!--通过主键修改数据-->

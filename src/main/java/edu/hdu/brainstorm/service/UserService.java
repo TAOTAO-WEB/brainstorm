@@ -12,6 +12,14 @@ import java.util.List;
 public interface UserService {
 
     /**
+     * 通过用户名查询单条数据
+     *
+     * @param username 用户名
+     * @return 实例对象
+     */
+    User queryByUsername(String username);
+
+    /**
      * 通过ID查询单条数据
      *
      * @param userid 主键
