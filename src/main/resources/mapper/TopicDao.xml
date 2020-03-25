@@ -15,9 +15,17 @@
     <!--查询单个-->
     <select id="queryById" resultMap="TopicMap">
         select
-          topicid, userid, context, description, tag, date, isdeleted
+          topicid, userid, context, description, tag, date
         from brainstorm.topic
-        where topicid = #{topicid}
+        where topicid = #{topicid} and isdeleted = 0
+    </select>
+
+    <!--查询个人所有主题帖-->
+    <select id="queryAllByUserid" resultMap="TopicMap">
+        select
+          *
+        from brainstorm.topic
+        where userid = #{userid} and isdeleted = 0
     </select>
 
     <!--查询指定行数据-->
@@ -28,40 +36,19 @@
         limit #{offset}, #{limit}
     </select>
 
-    <!--通过实体作为筛选条件查询-->
+    <!--查询全部-->
     <select id="queryAll" resultMap="TopicMap">
         select
-          topicid, userid, context, description, tag, date, isdeleted
+          *
         from brainstorm.topic
-        <where>
-            <if test="topicid != null and topicid != ''">
-                and topicid = #{topicid}
-            </if>
-            <if test="userid != null and userid != ''">
-                and userid = #{userid}
-            </if>
-            <if test="context != null and context != ''">
-                and context = #{context}
-            </if>
-            <if test="description != null and description != ''">
-                and description = #{description}
-            </if>
-            <if test="tag != null and tag != ''">
-                and tag = #{tag}
-            </if>
-            <if test="date != null">
-                and date = #{date}
-            </if>
-            <if test="isdeleted != null and isdeleted != ''">
-                and isdeleted = #{isdeleted}
-            </if>
-        </where>
+        where isdeleted = 0
+        order by date ${order}
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="topicid" useGeneratedKeys="true">
-        insert into brainstorm.topic(userid, context, description, tag, date, isdeleted)
-        values (#{userid}, #{context}, #{description}, #{tag}, #{date}, #{isdeleted})
+        insert into brainstorm.topic(topicid,userid, context, description, tag, date, isdeleted)
+        values (#{topicid},#{userid}, #{context}, #{description}, #{tag}, #{date}, 0)
     </insert>
 
     <!--通过主键修改数据-->
@@ -91,8 +78,12 @@
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from brainstorm.topic where topicid = #{topicid}
-    </delete>
+    <update id="deleteById">
+        update brainstorm.topic
+        <set>
+        isdeleted = 1
+        </set>
+        where topicid = #{topicid}
+    </update>
 
 </mapper>

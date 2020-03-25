@@ -18,6 +18,7 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
     @Resource
     private CommentDao commentDao;
+    private int showWordNum = 5;
 
     /**
      * 通过ID查询单条数据
@@ -29,6 +30,16 @@ public class CommentServiceImpl implements CommentService {
     public Comment queryById(String commentid) {
         return this.commentDao.queryById(commentid);
     }
+
+    @Override
+    public List<Comment> queryAllByUserid(String userid){
+        List<Comment> comment_list = this.commentDao.queryAllByUserid(userid);
+        // 只截取showWordNum个字符展示
+        for (Comment comment:comment_list) {
+            comment.setContext(comment.getContext().substring(0,showWordNum));
+        }
+        return comment_list;
+    };
 
     /**
      * 查询多条数据

@@ -18,6 +18,7 @@ import java.util.List;
 public class TopicServiceImpl implements TopicService {
     @Resource
     private TopicDao topicDao;
+    private int showWordNum = 5;
 
     /**
      * 通过ID查询单条数据
@@ -30,6 +31,24 @@ public class TopicServiceImpl implements TopicService {
         return this.topicDao.queryById(topicid);
     }
 
+    @Override
+    public List<Topic> queryAllByUserid(String userid){
+        List<Topic> topic_list = this.topicDao.queryAllByUserid(userid);
+        return getNumWord(topic_list);
+    };
+    @Override
+    public List<Topic> queryAll(String order){
+        List<Topic> topic_list = this.topicDao.queryAll(order);
+        return getNumWord(topic_list);
+    }
+
+    public List<Topic> getNumWord(List<Topic> topic_list){
+        // 只截取showWordNum个字符展示
+        for (Topic topic:topic_list) {
+            topic.setDescription(topic.getDescription().substring(0,showWordNum));
+        }
+        return topic_list;
+    };
     /**
      * 查询多条数据
      *

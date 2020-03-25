@@ -19,6 +19,14 @@
         where commentid = #{commentid}
     </select>
 
+    <!--查询个人所有评论-->
+    <select id="queryAllByUserid" resultMap="CommentMap">
+        select
+          *
+        from brainstorm.comment
+        where userid = #{userid} and isdeleted = 0
+    </select>
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="CommentMap">
         select
@@ -84,8 +92,12 @@
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from brainstorm.comment where commentid = #{commentid}
-    </delete>
+    <update id="deleteById">
+        update brainstorm.comment
+        <set>
+            isdeleted = 1
+        </set>
+        where commentid = #{commentid}
+    </update>
 
 </mapper>
