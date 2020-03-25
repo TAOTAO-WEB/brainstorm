@@ -19,6 +19,13 @@ public interface CommentDao {
      * @return 实例对象
      */
     Comment queryById(String commentid);
+    /**
+     * 通过userid查询个人的所有主题帖
+     *
+     * @param userid
+     * @return
+     */
+    List<Comment> queryAllByUserid(@Param("userid") String userid);
 
     /**
      * 查询指定行数据

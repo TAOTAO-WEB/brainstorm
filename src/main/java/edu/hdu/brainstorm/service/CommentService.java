@@ -20,6 +20,13 @@ public interface CommentService {
     Comment queryById(String commentid);
 
     /**
+     * 通过userid查询个人的所有评论
+     *
+     * @param userid
+     * @return 主题帖列表
+     */
+    List<Comment> queryAllByUserid(String userid);
+    /**
      * 查询多条数据
      *
      * @param offset 查询起始位置

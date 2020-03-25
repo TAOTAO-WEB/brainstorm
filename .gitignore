@@ -29,3 +29,11 @@ build/
 
 ### VS Code ###
 .vscode/
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+application.properties
+out
+gen
+mysql-connector-java-8.0.16.jar
