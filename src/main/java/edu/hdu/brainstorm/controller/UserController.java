@@ -1,6 +1,7 @@
 package edu.hdu.brainstorm.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import edu.hdu.brainstorm.annotation.UserLoginToken;
 import edu.hdu.brainstorm.entity.User;
 import edu.hdu.brainstorm.service.UserService;
 import edu.hdu.brainstorm.util.idutils;
@@ -8,8 +9,11 @@ import edu.hdu.brainstorm.util.shautils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import edu.hdu.brainstorm.service.impl.TokenService;
+
+
 /**
  * (User)表控制层
  *
@@ -89,5 +93,41 @@ public class UserController {
             return jsonObject;
         }
     }
+
+    @GetMapping("userhome")
+    @UserLoginToken
+    public Object getuserhome(HttpServletRequest request){
+        JSONObject jsonObject = new JSONObject();
+        User loginUser = (User) request.getAttribute("currentUser"); //获取当前用户信息
+        jsonObject.put("username",loginUser.getUsername());
+        jsonObject.put("pic",loginUser.getPic());
+        return jsonObject;
+    }
+
+
+//    @GetMapping("changepic")
+//    @UserLoginToken
+//    public Object updatepic(HttpServletRequest request,@RequestParam("file") MultipartFile file){
+//        JSONObject jsonObject = new JSONObject();
+//        User loginUser = (User) request.getAttribute("currentUser"); //获取当前用户信息
+//        if(file==null) {
+//            jsonObject.put("msg","文件为空");
+//            return jsonObject;
+//        }
+//        String type = file.getContentType();
+//        if("image/png".equals(type) || "image/jpeg".equals(type)){
+//            try {
+//
+//                file.getInputStream();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        else {
+//            jsonObject.put("msg","请上传png，jpg图片");
+//            return jsonObject;
+//        }
+//
+//    }
 
 }

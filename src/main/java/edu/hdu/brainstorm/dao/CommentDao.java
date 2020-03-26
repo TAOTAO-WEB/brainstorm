@@ -28,6 +28,14 @@ public interface CommentDao {
     List<Comment> queryAllByUserid(@Param("userid") String userid);
 
     /**
+     * 通过topicid查询某个话题的所有评论
+     *
+     * @param topic
+     * @return
+     */
+    List<Comment> queryAllByTopicid(@Param("topicid") String topic);
+
+    /**
      * 查询指定行数据
      *
      * @param offset 查询起始位置

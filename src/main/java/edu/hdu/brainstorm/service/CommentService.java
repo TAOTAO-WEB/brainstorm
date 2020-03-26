@@ -26,6 +26,14 @@ public interface CommentService {
      * @return 主题帖列表
      */
     List<Comment> queryAllByUserid(String userid);
+
+    /**
+     * 通过topicid 查询主题的所有评论
+     *
+     * @param topic
+     * @return 评论列表
+     */
+    List<Comment> queryAllByTopicid(String topicid);
     /**
      * 查询多条数据
      *

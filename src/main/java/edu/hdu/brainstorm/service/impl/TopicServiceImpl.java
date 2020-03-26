@@ -35,7 +35,7 @@ public class TopicServiceImpl implements TopicService {
     public List<Topic> queryAllByUserid(String userid){
         List<Topic> topic_list = this.topicDao.queryAllByUserid(userid);
         return getNumWord(topic_list);
-    };
+    }
     @Override
     public List<Topic> queryAll(String order){
         List<Topic> topic_list = this.topicDao.queryAll(order);

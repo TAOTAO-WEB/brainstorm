@@ -39,7 +39,19 @@ public class CommentServiceImpl implements CommentService {
             comment.setContext(comment.getContext().substring(0,showWordNum));
         }
         return comment_list;
-    };
+    }
+
+    @Override
+    public List<Comment> queryAllByTopicid(String topicid) {
+        List<Comment> comment_list = this.commentDao.queryAllByTopicid(topicid);
+        for (Comment comment:comment_list) {
+            if(comment.getContext().length()>5){
+                comment.setContext(comment.getContext().substring(0,showWordNum));
+            }
+        }
+        return comment_list;
+    }
+
 
     /**
      * 查询多条数据

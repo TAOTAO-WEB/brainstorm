@@ -27,6 +27,15 @@
         where userid = #{userid} and isdeleted = 0
     </select>
 
+    <!--查询某topic所有评论-->
+    <select id="queryAllByTopicid" resultMap="CommentMap">
+        select
+          *
+        from brainstorm.comment
+        where topicid = #{topicid} and isdeleted = 0
+    </select>
+
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="CommentMap">
         select
@@ -64,8 +73,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="commentid" useGeneratedKeys="true">
-        insert into brainstorm.comment(topicid, userid, context, date, isdeleted)
-        values (#{topicid}, #{userid}, #{context}, #{date}, #{isdeleted})
+        insert into brainstorm.comment(topicid, userid, context, date, commentid,isdeleted)
+        values (#{topicid}, #{userid}, #{context}, #{date}, #{commentid},0)
     </insert>
 
     <!--通过主键修改数据-->
