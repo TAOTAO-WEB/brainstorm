@@ -45,8 +45,10 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> queryAllByTopicid(String topicid) {
         List<Comment> comment_list = this.commentDao.queryAllByTopicid(topicid);
         for (Comment comment:comment_list) {
-            if(comment.getContext().length()>5){
+            if(comment.getContext().length()>=showWordNum){
                 comment.setContext(comment.getContext().substring(0,showWordNum));
+            }else{
+                comment.setContext(comment.getContext());
             }
         }
         return comment_list;

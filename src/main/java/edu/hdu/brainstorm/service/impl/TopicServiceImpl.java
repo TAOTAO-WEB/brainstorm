@@ -45,7 +45,11 @@ public class TopicServiceImpl implements TopicService {
     public List<Topic> getNumWord(List<Topic> topic_list){
         // 只截取showWordNum个字符展示
         for (Topic topic:topic_list) {
-            topic.setDescription(topic.getDescription().substring(0,showWordNum));
+            if(topic.getDescription().length()<showWordNum){
+                topic.setDescription(topic.getDescription());
+            }else{
+                topic.setDescription(topic.getDescription().substring(0,showWordNum));
+            }
         }
         return topic_list;
     };
