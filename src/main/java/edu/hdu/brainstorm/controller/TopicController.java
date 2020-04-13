@@ -23,6 +23,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-03-21 20:32:29
  */
+@CrossOrigin
 @RestController
 @RequestMapping("topic")
 public class TopicController {

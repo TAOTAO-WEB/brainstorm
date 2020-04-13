@@ -20,6 +20,7 @@ import edu.hdu.brainstorm.service.impl.TokenService;
  * @author makejava
  * @since 2020-03-21 20:20:05
  */
+@CrossOrigin
 @RestController
 @RequestMapping("user")
 public class UserController {

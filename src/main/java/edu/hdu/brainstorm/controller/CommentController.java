@@ -20,6 +20,7 @@ import edu.hdu.brainstorm.util.idutils;
  * @author makejava
  * @since 2020-03-21 20:32:57
  */
+@CrossOrigin
 @RestController
 @RequestMapping("comment")
 public class CommentController {
