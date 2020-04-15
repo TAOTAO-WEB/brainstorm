@@ -82,6 +82,7 @@ public class UserController {
                 String token = tokenService.getToken(userbase);
                 jsonObject.put("token",token);
                 jsonObject.put("user",userbase);
+                jsonObject.put("msg","登录成功");
                 return jsonObject;
             }
             else {
